@@ -1,0 +1,35 @@
+/* StylishSearchBar.css */
+
+.search-container {
+    position: relative;
+    display: flex;
+  }
+  
+  .search-input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+    font-size: 16px;
+  }
+  
+  .search-button {
+    background-color: #4caf50; /* Green background color */
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Style the search icon inside the button */
+  .search-button i {
+    font-size: 18px;
+  }
+  
+  /* Hover effect for the button */
+  .search-button:hover {
+    background-color: #45a049;
+  }
+  
