@@ -1,23 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import Map, { Marker } from "react-map-gl";
-import { useNavigate } from 'react-router-dom';
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
-const MapView = () => {
+const SearchResult = () => {
   const [currentLocation, setCurrentLocation] = useState({ latitude: null, longitude: null });
 const [data,setData] = useState([]);
 const [selected,setSelected] = useState();
 var [user,setUser] = useState([]);
+
+const {query} = useParams();
+
 useEffect(()=>
 {
 getCurrentLocation();
-axios.get("http://localhost:3005/view")
+axios.get(`http://localhost:3005/search/${query}`)
 .then(response =>{
 console.log(response.data)
 setData(response.data) })
 .catch(err=>console.log(err))
 },[])
+
+// useEffect(() => {
+//     axios.get("http://localhost:3005/view")
+//       .then(response => {
+//         console.log(response.data)
+//         setRating(response.data)
+//       })
+//       .catch(err => console.log(err))
+//   }, []);
 
 const getCurrentLocation = () => {
   if (navigator.geolocation) {
@@ -83,4 +95,4 @@ const getCurrentLocation = () => {
   )
 }
 
-export default MapView
+export default SearchResult

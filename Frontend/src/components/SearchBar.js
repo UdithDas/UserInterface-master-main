@@ -1,13 +1,29 @@
-import React from 'react';
-import './SearchBar.css'; // Import the corresponding CSS file
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const SearchBar = () => {
+const SearchBar = ({ onDataFetched }) => {
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const handleSearch = async () => {
+    try {
+      // Replace 'YOUR_BACKEND_API_ENDPOINT' with the actual endpoint for searching
+      const response = await axios.get(`http://localhost:3005/search=${searchTerm}`);
+      onDataFetched(response.data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      // Handle error or set state to indicate an error
+    }
+  };
+
   return (
-    <div className="search-container">
-      <input type="text" placeholder="Search" className="search-input" />
-      <button type="submit" className="search-button">
-        <i className="fa fa-search"></i>
-      </button>
+    <div style={{marginLeft:'100px',marginTop:'10px',display:'flex',alignItems:'flex-start',justifyContent:'space-evenly'}}>
+      <input
+        type="text"
+        placeholder="Enter search Place"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+      />
+      <button onClick={handleSearch}>Search</button>
     </div>
   );
 };
